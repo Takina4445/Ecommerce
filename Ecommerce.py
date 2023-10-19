@@ -23,7 +23,7 @@ while True:
     print(f"4.{dfGetQuestionOption4}")
     userInputAnswer=input("請作答:")
     if userInputAnswer==str(dfGetQuestionAnswer):
-        print("答案正確!!")
+        print("答案正確!!!")
     else:
         print(f"錯誤答案，正確答案為:{dfGetQuestionAnswer}")
     print("*"*20)
