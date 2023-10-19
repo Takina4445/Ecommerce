@@ -30,4 +30,6 @@ while True:
     else:
         print(f"錯誤答案，正確答案為:{dfGetQuestionAnswer}")
     
-    print("*"*20+f"({userTotalCorrectAnswer}/{userTotalAnswer}，正確率:{userTotalCorrectAnswer/userTotalAnswer*100}%)\n")
+    print("*"*20+f"({userTotalCorrectAnswer}/{userTotalAnswer}，正確率:{round(userTotalCorrectAnswer/userTotalAnswer*100,2)}%)\n")
+    
+    
