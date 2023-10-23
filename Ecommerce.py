@@ -52,4 +52,4 @@ while True:
     
     #json檔案儲存
     with open(AnswerRecord_json_name,"w",encoding='utf8')as update_AnsRd_json:
-        json.dump(AnsRd_json,update_AnsRd_json)
+        json.dump(AnsRd_json,update_AnsRd_json,ensure_ascii=False, indent=4)
