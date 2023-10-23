@@ -1,9 +1,14 @@
 import pandas as pd
 import random
-df=pd.read_excel("TQC-電商考題.xlsx",sheet_name="工作表2",usecols="C:I,K")
+import json
+#初始化讀取變數
+df=pd.read_excel("TQC-電商考題.xlsx",sheet_name="工作表2",usecols="C:I,K")#test excel file
+AnswerRecord_json_name="AnswerRecord.json"
+#初始化參數
 random.seed()
 userTotalCorrectAnswer=0
 userTotalAnswer=0
+#主程式循環
 while True:
     userTotalAnswer+=1#使用者答題總數+1
     dfRandomChoiceColum=random.randint(1,df.shape[0])#0是欄位名稱
