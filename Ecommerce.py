@@ -10,6 +10,10 @@ userTotalCorrectAnswer=0
 userTotalAnswer=0
 #主程式循環
 while True:
+    #初始化區域
+    with open(AnswerRecord_json_name,"r",encoding='utf8') as AnsRd_jsfile:
+        AnsRd_json=json.load(AnsRd_jsfile)
+    #主程式區域
     userTotalAnswer+=1#使用者答題總數+1
     dfRandomChoiceColum=random.randint(1,df.shape[0])#0是欄位名稱
     dfGetQuestionNumber=df.iat[dfRandomChoiceColum,0]
@@ -30,11 +34,21 @@ while True:
     print(f"4.{dfGetQuestionOption4}")
     userInputAnswer=input("請作答:")
     if userInputAnswer==str(dfGetQuestionAnswer):
-        userTotalCorrectAnswer+=1#使用者正確答題數量+1
         print("答題正確!!!")
+        userTotalCorrectAnswer+=1#使用者正確答題數量+1
+        #正確的題號出現json錯誤清單中，則將在答題正確次數+1
+        if f"{dfGetQuestionNumber}" in AnsRd_json["WrongQuestion"]:
+            AnsRd_json["WrongQuestion"][f"{dfGetQuestionNumber}"]["ReAnswerCorrectTimes"]+=1
     else:
         print(f"錯誤答案，正確答案為:{dfGetQuestionAnswer}")
-    
+        #錯誤的題號在json資料庫中便將錯誤次數+1;否則將該題號加入錯誤清單中
+        if f"{dfGetQuestionNumber}" in AnsRd_json["WrongQuestion"]:
+            AnsRd_json["WrongQuestion"][f"{dfGetQuestionNumber}"]["WrongTimes"]+=1
+        else:
+            AnsRd_json["WrongQuestion"][f"{dfGetQuestionNumber}"]={"QuestionNumber":f"{dfGetQuestionNumber}","WrongTimes":1,"ReAnswerCorrectTimes":0,"UserNeedTest":True}
+    #答題正確率計算與顯示
     print("*"*20+f"({userTotalCorrectAnswer}/{userTotalAnswer}，正確率:{round(userTotalCorrectAnswer/userTotalAnswer*100,2)}%)\n")
     
-    
+    #json檔案儲存
+    with open(AnswerRecord_json_name,"w",encoding='utf8')as update_AnsRd_json:
+        json.dump(AnsRd_json,update_AnsRd_json)
