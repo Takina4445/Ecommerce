@@ -16,6 +16,7 @@ while True:
     #主程式區域
     userTotalAnswer+=1#使用者答題總數+1
     dfRandomChoiceColum=random.randint(1,df.shape[0])#0是欄位名稱
+    # dfRandomChoiceColum=30
     dfGetQuestionNumber=df.iat[dfRandomChoiceColum,0]
     dfGetQuestionAnswer=df.iat[dfRandomChoiceColum,1]#答案
     dfGetQuestionTopic=df.iat[dfRandomChoiceColum,2]
